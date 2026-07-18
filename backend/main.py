@@ -106,7 +106,11 @@ def root():
 
 @app.get("/health", tags=["health"])
 def health():
-    return {"status": "healthy"}
+    db_type = "PostgreSQL" if "postgresql" in DATABASE_URL else "SQLite (Ephemeral on Vercel)" if "/tmp" in DATABASE_URL else "SQLite"
+    return {
+        "status": "healthy",
+        "database": db_type
+    }
 
 
 # Apply rate limiter to plan-trip route
