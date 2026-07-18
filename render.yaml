@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: ai-trip-planner-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      # AI providers — set at least GROQ_API_KEY for live planning
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      # Weather
+      - key: OPENWEATHER_API_KEY
+        sync: false
+      # Database — set to your Render Postgres Internal URL for persistence
+      - key: DATABASE_URL
+        sync: false
+      # CORS — set to your Vercel frontend URL
+      - key: CORS_ORIGINS
+        sync: false
+      # Rate limiting
+      - key: PLAN_TRIP_RATE_LIMIT
+        value: 10/minute
+      # Debug
+      - key: SQL_ECHO
+        value: "false"

@@ -1,0 +1,37 @@
+# AI Trip Planner Agent — Backend Dependencies
+# Install: pip install -r requirements.txt
+
+# Web framework & server
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+
+# Database ORM
+SQLAlchemy==2.0.36
+
+# Database drivers
+# SQLite is built-in; psycopg2-binary is needed for PostgreSQL (Render production)
+psycopg2-binary==2.9.10
+
+# Validation & settings
+pydantic==2.10.4
+pydantic-settings==2.7.0
+email-validator==2.2.0
+
+# Environment variables
+python-dotenv==1.0.1
+
+# AI — Groq (preferred, OpenAI-compatible) + OpenAI fallback
+openai==1.58.1
+
+# HTTP client (Weather + OSM Places)
+httpx==0.28.1
+
+# PDF generation
+reportlab==4.2.5
+
+# Rate limiting
+slowapi==0.1.9
+
+# CORS & utilities
+# (starlette/cors is bundled with fastapi)
