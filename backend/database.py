@@ -17,7 +17,12 @@ logger = logging.getLogger(__name__)
 
 # Resolve DB path relative to this file so it works regardless of CWD
 BASE_DIR = Path(__file__).resolve().parent
-DEFAULT_DB_PATH = BASE_DIR / "trip_planner.db"
+
+# On serverless environments (Vercel, AWS Lambda), write to the writable /tmp path
+if os.getenv("VERCEL") == "1" or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+    DEFAULT_DB_PATH = Path("/tmp") / "trip_planner.db"
+else:
+    DEFAULT_DB_PATH = BASE_DIR / "trip_planner.db"
 
 # Prefer DATABASE_URL from environment (e.g. Render); fall back to local SQLite
 _raw_url = os.getenv("DATABASE_URL", f"sqlite:///{DEFAULT_DB_PATH}")
