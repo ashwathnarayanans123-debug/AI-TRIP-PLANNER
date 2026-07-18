@@ -74,8 +74,7 @@ def _apply_plan_fields(trip: Trip, plan: TripPlanResponse) -> None:
 @router.post("/plan-trip", response_model=TripPlanResponse)
 def plan_trip(payload: TripPlanRequest, request: Request) -> TripPlanResponse:
     """Generate a personalized AI trip itinerary (rate-limited)."""
-    if _RATE_LIMITING and limiter is not None:
-        limiter.check()  # decorator approach used at app level; manual check as fallback
+    # Rate limiting is applied via middleware and decorators in main.py.
     return generate_trip_plan(payload)
 
 
