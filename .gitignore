@@ -29,3 +29,4 @@ Thumbs.db
 # Local SQLite
 backend/trip_planner.db
 backend/*.db
+.vercel
